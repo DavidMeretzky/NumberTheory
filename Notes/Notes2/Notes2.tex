@@ -1,0 +1,219 @@
+\documentclass{article}
+
+\usepackage{algorithmic, amsmath, amsthm, amsfonts, amssymb, enumerate, tikz, tikz-cd, color, mathrsfs,inputenc,epigraph} %tikz is for drawing lattices %tikz-cd is for commutative diagrams
+															%color is for making notes in red 
+															%mathrsfs is for power set font
+%\usepackage[mathscr]{eucal} %mathscr gives nice script fonts
+
+\newtheoremstyle{problemstyle}  % <name> This is my problemstyle. use begin{problem}.
+        {12pt}                                               % <space above>
+        {}                                               % <space below>
+        {}                               % <body font>
+        {}                                                  % <indent amount}
+        {\bfseries}                 % <theorem head font>
+        {\normalfont\bfseries.}         % <punctuation after theorem head>
+        {.5em}                                          % <space after theorem head>
+        {}                                                  % <theorem head spec (can be left empty, meaning `normal')>
+
+
+\theoremstyle{problemstyle}
+
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{proposition}{Proposition}
+\newtheorem{article}{Article}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{definition}{Definition}
+
+\setlength\parindent{0pt}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\ndiv}{\hspace{-4pt}\not|\hspace{2pt}}
+
+\title{ \vspace{-10ex} %uncomment to remove vertical space
+%title of assignment goes here e.g. "Math 721 Homework 3"
+Math 313/623 Notes 2
+}
+
+\author{David L. Meretzky
+}
+
+
+\date{%date assignment is due goes here
+Thursday January 31, 2019
+} 
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+%\renewcommand{\thefootnote}{$\dagger$} %changes default footnote marking to a dagger instead of a number (numbers are sometimes mistaken for citations)
+
+\begin{document}
+
+\maketitle
+
+\epigraph{Plato said, ``God is a geometer". Jacobi changed this to, ``God is an arithmetician." Then came Kronecker and fashioned the memorable expression, ``God created the natural numbers, and all the rest is the work of man."}{\textit{Felix Klein}}
+
+Recall from last class that the major theorem we obtained was that relative to some modulus, each number has a unique least positive residue. Today we will go over two approaches to one of the first major theorems in multiplicative number theory, that every number has a unique prime factorization. In Gauss's approach, the heavy lifting is relegated to article 13.
+
+\setcounter{section}{1}
+\section{Congruences of the First Degree}
+
+\setcounter{article}{12}
+
+\subsection{Preliminary theorems regarding prime numbers, factors etc.}
+
+\begin{article}
+The product of two positive numbers each of which is smaller than a given prime number cannot be divided by this prime number.  Said another way, let $p$ be prime, and $0<a<p$, then no positive number $b<p$ can be found such that $ab \equiv 0 \Mod{p}$.  
+\end{article}
+
+The proof is by contradiction. 
+
+\begin{proof}
+Suppose the theorem is false. Then there is a collection of numbers $b_1,...,b_n$ such that each $b_i < p$ and $ab_i \equiv 0 \Mod{p}$. Let $b$ be the smallest such number in that collection. It is clear that $b >1$, because otherwise we run into trouble. If $b = 1$, then $ab = a$ and since $a < p$ by hypothesis, $p$ cannot possibly divide $ab$. Now $p$ is prime, and therefore $b$ cannot divide it. So $p$ lies between successive multiples of $b$.   There exists some $m$ such that \begin{equation}bm < p < b(m+1).\end{equation} Subtracting $bm$ from equation (1) we obtain  $$0 < p-bm < b.$$ Let $b' = p-bm$. We have that $b'$ is smaller than $b$. The contradiction in this proof will be that $b'$ must be in the collection of numbers $b_1,...,b_n$ such that each $b_i < p$ and $ab_i \equiv 0 \Mod{p}$. We compute $ab' = ap-abm$. Since $p \equiv 0 \Mod{p}$ and $ab \equiv 0 \Mod{p}$ it follows by article 7 that $ap \equiv 0 \Mod{p}$ and $abm \equiv 0 \Mod{p}$ and by article 6 that $ap-abm \equiv 0 \Mod{p}$. It follows that $ab' \equiv 0 \Mod{p}$ which is a contradition since $b$ is the smallest such number that has the property $ab' \equiv 0 \Mod{p}$. 
+\end{proof}
+
+\begin{article}
+If neither $a$ nor $b$ can be divided by a prime number $p$ then the product $ab$ cannot be divided by $p$.
+\end{article}
+
+\begin{proof}
+Let $\alpha$ and $\beta$ be the least positive residues of $a$ and $b$ respectively, relative to the modulus $p$. Now if $ab \equiv 0 \Mod{p}$ then since $ab \equiv \alpha \beta$, we have that $\alpha \beta \equiv 0 \Mod{p}$ which contradicts the previous article. 
+\end{proof}
+
+The above article can be restated in terms of the contrapositive: If a prime $p$ divides $ab$ then $p$ divides $a$ or $p$ divides $b$. This is an important characterization of primes. In particular, for all numbers $a$ and $b$, if a number $p$ divides $ab$ means that $p$ must divide either $a$ or $b$ then $p$ is prime. For suppose $p$ is composite. $p = kl$, then $p$ divides itself, but $p$ divides neither $k$ nor $l$, since both are strictly less than $p$.  Thus we can take this property to be the definition of primality if we so desire. In some contexts this will be an easier definition to work with. 
+
+\begin{article}
+If none of the numbers $a$, $b$, $c$, $d$, etc. can be divided by a prime $p$, neither can their product $abcd$ etc. 
+\end{article}
+
+\begin{proof}
+by the previous article, $ab$ cannot be divided by $p$. Then in the previous article if we let $a = ab$ and $b = c$, we have that $abc$ cannot be divided by $p$. Then in the previous article if we let $a = abc$ and $b = d$, we have that $abcd$ cannot be divided by $p$. Continue in this manner to obtain the result. 
+\end{proof}
+
+Unique factorization for the integers. 
+
+\begin{article}
+A composite number can be resolved into prime factors in only one way. 
+\end{article}
+
+\begin{proof}
+Assume for the time being that such a factorization exists. This is not difficult to prove and we shall do so shortly. Uniqueness is more difficult to prove. Given a number $A = a^\alpha b^\beta c^\gamma$ etc. where $a$, $b$, and $c$ etc. are distinct prime numbers and $\alpha$, $\beta$, and $\gamma$ etc. are positive integers. Suppose that there is some second system of facors which equal $A$. Clearly, $A|A$ so each system must divide the other. Furthermore, suppose there is a prime factor $p$ which appears in the second system but not in the first. Since $p$ appears in the second system $p|A$. However, $p$ does not appear in the first system. Each prime of the first system is not divisible by anything except $1$ and itself, and definitely not $p$, so by the previous article, $p\ndiv A$. So we have a contradiction. The prime factors in both factorization systems must be the same. However, the powers which each prime factor has may differ in each system. Suppose a prime $p$ occurs in a two factorizations with multiplicity $m$ and $n$. That is, in one system we have a facor of $p^m$ and in another we have a facor of $p^n$. Without loss of generality we may assume that $m < n$. Now consider $A/p^n$. In one system we will have $p^{m-n}$ and in the other we will have no powers of $p$. Then one facorization does not contain the prime $p$ while the other contains it $p^{m-n}$ times, which contradicts what we showed in the first part of the proof. 
+\end{proof}
+
+Unique factorization is a big deal. Things really fall apart if we dont have unique factorization. In fact, most of the number systems that we will look at will have unique factorization. We will now switch to notes based on Kenneth Ireland and Michael Rosen's text \textit{A Classical Introduction to Modern Number Theory.}
+
+\section*{Unique Factorization}
+\subsection*{Unique Factorization in $\mathbb{Z}$}
+
+We begin by recovering the portion of article 16 which we omitted. 
+
+\begin{lemma}
+Every nonzero integer can be written as a product of primes. 
+\end{lemma}
+
+\begin{proof}
+Assume the collection of integers which cannot be written as a product of primes is not empty. Then $N$ be the smallest positive integer which cannot be written as a product of primes. Since $N$ cannot be prime $N = mn$, where $1<n,m<N$. Since both $n$ and $m$ are smaller than $N$, they must each be a product of primes. Thus their product, $mn = N$, is a product of primes which is a contradiction.  There is also a direct proof by induction. 
+\end{proof}
+
+\begin{definition}
+Let $n \in \mathbb{Z}$ and $p$ be prime. Then if $n$ is not zero, there is a nonnegative integer $a$ such that $p^a|n$ but $p^{a+1}\ndiv n$. Roughly, $a$ is the number of times that $p$ divides $n$. If $p\ndiv n$ then $a = 0$ because $p^0 = 1$ which divides everything. We call $a$ the order of $p$ in $n$ and denote it $ord_p(n) = a$. If $n = 0$, set $ord_p(n) = \infty$. 
+\end{definition}
+
+By lemma 1, every number $n$ can be written as $$n = (-1)^\epsilon(n) p_1^{a_1}p_2^{a_2}...p_m^{a_m}$$ where $\epsilon(n)$ is $0$ if $n$ is positive and $1$ if $n$ is negative.\\
+
+Here is a restatement and sharpened form of unique factorization. 
+
+\begin{theorem}
+For every nonzero integer $n$ there is a prime factorization 
+\begin{equation*}n = (-1)^{\epsilon(n)}\prod_pp^{a(p)}, \end{equation*} 
+with the exponents uniquely determined by $n$. In fact $a(p) = ord_p(n)$. 
+\end{theorem}
+
+Such a factorization exists because of the previous lemma. The uniqueness is more difficult. 
+
+\begin{lemma}
+If $a,b \in \mathbb{Z}$ and $b > 0$, there exists $q,r \in \mathbb{Z}$ such that $a = qb+r$ with $0 \leq r < b$. 
+\end{lemma}
+
+\begin{proof}
+Consider the set $a+b\mathbb{Z}$. This set contains positive elements. Let $r = a - bq$ be the least positive element. (These elements are actually the residues of $a$ modulo $b$). We claim that $0 \leq r < b$, for if not, then $r = a-bq > b$ and so $0 \leq a-(q+1)b < r$, which contradicts the minimality of $r$. 
+\end{proof}
+
+Note that the above lemma will play exactly the same role in the proof of unique factorization that every number has a unique least positive residue. It follows that $r$ is this number. So lemma 2 is analogous to article 3. 
+
+\begin{definition}
+If $a_1,...,a_n$ are integers, then let $(a_1,...,a_n)$ denote the collection of all integers of the form $x_1a_1+...+x_na_n$. Integers of this form are called linear combinations of the list $a_1,...,a_n$. Collections of this form are called ideals of $\mathbb{Z}$. Note that if $c,d \in (a_1,...,a_n)$, then $c-d$ and $c+d$ are also in $(a_1,...,a_n)$. Letting all $x_i = 0$, we see that $0 \in (a_1,...,a_n)$. Note that $(a) = a\mathbb{Z}$. 
+\end{definition}
+
+\begin{lemma}
+For any $a,b \in \mathbb{Z}$, there exists a $d \in \mathbb{Z}$ such that $(a,b) = (d)$. 
+\end{lemma}
+
+\begin{proof}
+Let $d$ be the least positive element of $(a,b)$. Then $d = x_1a + x_2b$ for some $x_1$ and $x_2$. Clearly, any element of $(d)$ is of the form $x_3d = x_3(x_1a + x_2b) = x_3x_1a + x_3x_2b \in (a,b)$. Thus $(d) \subset (a,b)$.\\
+
+To show the reverse inclusion, let $c$ be any positive element of $(a,b)$.  Since $d$ is the least positive element of $(a,b)$ we have $d < c$. We can then apply lemma 1 to obtain $q, r$ such that $c = qd + r$ where $0 \leq r < d$. Since $c$ and $qd$ are both in $(a,b)$, $c-qd \in (a,b)$ and therefore, $r \in (a,b)$. Since $d$ is the least postive element, $r = 0$ and $c = qd \in (d)$.  
+\end{proof}
+
+\begin{definition}
+Let $a,b \in \mathbb{Z}$, their greatest common divisor is a number $d$ such that $d|a$ and $d|b$ and if $a$ and $b$ have any other common divisor, $c$, such that $c|a$ and $c|b$, then $c|d$.  
+\end{definition}
+
+\begin{lemma}
+Let $a,b,d \in \mathbb{Z}$ such that $(a,b) = (d)$, then $d$ is the greatest common divisor of $a$ and $b$.   
+\end{lemma}
+
+\begin{proof}
+We need to verify the previous definition. \\
+
+Since $a \in (d)$ and $b \in (d)$, there exist $k,l \in \mathbb{Z}$ such that $a = kd$ and $b = ld$, thus $d|a$ and $d|b$ suppose that $c$ is any common divisor of $a$ and $b$. Then $c|a$ and $c|b$ furthermore, for any $x,y \in \mathbb{Z}$, $c|xa$ and $c|yb$, therefore, by exercise 7 at the end of lecture 1 we have $c|(xa+yb)$ and therefore, $c$ divides any element of $(a,b)$. Since $d \in (a,b)$, $c|d$ as desired. 
+\end{proof}
+
+\begin{definition}
+We say that two integers $a$ and $b$, are relatively prime if their greatest common divisor is $1$ or $-1$, that is $(a,b) = (1)$ or $(a,b) = (-1)$. Note that $(1) = (-1) = 1\mathbb{Z} = \mathbb{Z}$. 
+\end{definition}
+
+For instance, $14$ and $25$ are relatively prime. Also $7$ and $3$ are relatively prime. However, $4$ and $6$ are not. 
+
+\begin{proposition}
+Suppoe $a|bc$ and that $(a,b) = (1)$, then $a|c$. 
+\end{proposition}
+
+\begin{proof}
+Since $(a,b) = (1)$, there exist $r,s \in \mathbb{Z}$ such that $ar + bs = 1$, then $acr + bcs = c$. Since we are assuming $a|bc$, then since $a|acr$ and $a|bcs$ we have $a|(acr + bcs)$ and therefore, $a|c$. 
+\end{proof}
+
+\begin{corollary}
+If $p$ is a prime and $p|bc$ then $p|b$ or $p|c$. 
+\end{corollary}
+
+\begin{proof}
+Left as an exercise, or look in the text. When you are finished, see article 14 and the discussion following it.  
+\end{proof}
+
+\begin{corollary}
+Suppose that $p$ is prime and that $a,b \in Z$, then $ord_p(ab) = ord_p(a) + ord_p(b)$. 
+\end{corollary}
+
+Try to prove yourself. This is straightforward. The function $ord$ should remind you of the log function. Think about how they are related. 
+
+\begin{proof}
+Let $\alpha = ord_p(a)$ and $\beta = ord_p(b)$. Then $a = p^{\alpha}c$ where $p\ndiv c$ and $b = p^{\beta}d$ where $p \ndiv d$ because otherwise $p^{\alpha+1}|a$ and $p^{\beta+1}|b$. Then $ab = p^{\alpha+\beta}cd$ and by the previous corollary, $p\ndiv cd$, thus $ord_p(ab) = \alpha+\beta = ord_p(a) + ord_p(b)$. 
+\end{proof}
+
+We can now prove the uniqueness in theorem 1. All that we have to do is prove that the exponents $a(p) = ord_p(n)$. 
+
+\begin{proof}
+Let $q$ be any prime. Apply $ord_q$ to both sides of the equation
+\begin{equation*}n = (-1)^{\epsilon(n)}\prod_pp^{a(p)}, \end{equation*} 
+to obtain 
+\setcounter{equation}{0}
+\begin{equation}ord_q(n) = ord_q((-1)^{\epsilon(n)}\prod_pp^{a(p)}) = ord_q((-1)^{\epsilon(n)})+ \sum_pord_q(p^{a(p)}).  \end{equation} 
+
+Clearly, $ord_q((-1)^{\epsilon(n)}) = 0$ and $$ord_q(p^{a(p)}) = a(p)ord_q(p)$$ by the log-like property following from corollary 2. Note that by definition however,  $ord_q(p) = 1$ if $q = p$ and $ord_q(p) = 0$ if $q \neq p$. Thus
+equation (1) becomes $ord_q(n) = a(p)$ when $q = p$. 
+\end{proof}
+
+\end{document}
+

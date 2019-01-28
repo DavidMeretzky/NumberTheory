@@ -1,0 +1,156 @@
+\documentclass{article}
+
+\usepackage{algorithmic, amsmath, amsthm, amsfonts, amssymb, enumerate, tikz, tikz-cd, color, mathrsfs,inputenc,epigraph} %tikz is for drawing lattices %tikz-cd is for commutative diagrams
+															%color is for making notes in red 
+															%mathrsfs is for power set font
+%\usepackage[mathscr]{eucal} %mathscr gives nice script fonts
+
+\newtheoremstyle{problemstyle}  % <name> This is my problemstyle. use begin{problem}.
+        {12pt}                                               % <space above>
+        {}                                               % <space below>
+        {}                               % <body font>
+        {}                                                  % <indent amount}
+        {\bfseries}                 % <theorem head font>
+        {\normalfont\bfseries.}         % <punctuation after theorem head>
+        {.5em}                                          % <space after theorem head>
+        {}                                                  % <theorem head spec (can be left empty, meaning `normal')>
+
+
+\theoremstyle{problemstyle}
+
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{proposition}{Proposition}
+\newtheorem{article}{Article}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{exercise}{Exercise}
+\newtheorem{definition}{Definition}
+
+\setlength\parindent{0pt}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\ndiv}{\hspace{-4pt}\not|\hspace{2pt}}
+
+\title{ \vspace{-10ex} %uncomment to remove vertical space
+%title of assignment goes here e.g. "Math 721 Homework 3"
+Math 313/623 Notes 4
+}
+
+\author{David L. Meretzky
+}
+
+
+\date{%date assignment is due goes here
+Tuesday February 5th, 2019
+} 
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+%\renewcommand{\thefootnote}{$\dagger$} %changes default footnote marking to a dagger instead of a number (numbers are sometimes mistaken for citations)
+
+\begin{document}
+
+\maketitle
+
+\epigraph{The central notion in commutative algebra is that of a prime ideal. This provides a common generalization of the primes of arithmetic and the points of geometry.}{M.F. Atiyah}
+
+Recall from last class that we discussed some consequences of unique factorization and some basic properties of commutative rings. Today we will show that that certain polynomial rings behave like the integers in that they have primes, congruences, and unique factorization. We will also discuss more general constructions and perhaps an algorithm or two.\\ 
+
+The fields we know about so far are $\mathbb{Z}/p\mathbb{Z}$, $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$. Let $k$ be a field. What follows will be perhaps easiest if you set $k = \mathbb{Q}$ or $\mathbb{R}$ in your mind. Then $k[x]$ denotes the ring of polynomials with coefficients coming from $k$. We can add and multiply polynomials as usual. It is left to you to check that the distributive law holds. The constant polynomials $z(x) = 0$ and $i(x) = 1$ are the additive identity and multiplicative identity of $k[x]$ respectively. Does $k[x]$ have units? Does it have zero divisors?
+
+\begin{definition}
+The degree of a polynomial $f \in k[x]$ is the positive integer which is the largest power of $x$ appearing in $f$. We denote the degree of $f$ by deg $f$. 
+\end{definition}
+
+\begin{proposition}
+$\text{deg } fg = \text{deg } f + \text{deg } g$. 
+\end{proposition}
+
+\begin{proof}
+Let $ax^n$ be the leading term of $f$ and $bx^m$ be the leading term of $g$. Thus $\text{deg } f + \text{deg } g = m+n$. The leading term of $fg = abx^{m+n}$ thus  $\text{deg } fg = m+n$. 
+\end{proof}
+
+We say that the degree of a constant polynomial is $0$. 
+
+\begin{proposition}
+The units of $k[x]$ are precisely the constant polynomials. 
+\end{proposition}
+
+\begin{proof}
+Let $p(x) = c = c1 + 0x +0x^2 + 0x^3$ be a constant polynomial. Then since $c \in k$ which is a field, $c$ has a multiplicative inverse $d$. Let $q(x) = d$ then $p(x)q(x) = cd = 1 = i(x)$. So $p(x)$ has a multiplicative inverse.\\
+
+Suppose that $p(x)$ is a unit of $k[x]$. Then $p(x)$ has a multiplicative inverse $q(x)$ such that $p(x)q(x) = i(x) = 1$ for all $x$. Computing $\text{deg }(p(x)q(x)) = \text{deg }p(x) + \text{deg }q(x) = \text{deg }i(x) = 0$. We must have that $\text{deg }p(x) = \text{deg }q(x) = 0$ since the degree is always positive. Thus $p(x)$ and $q(x)$ are both constant. 
+\end{proof}
+
+\begin{proposition}
+The polynomial ring $k[x]$ is an integral domain, that is, it has no zero divisors. 
+\end{proposition}
+
+\begin{proof}
+The nonzero constant polynomials all have multiplicative inverses and therefore are units and cannot be zero divisors. Let $f(x)$ be a polynomial of degree greater than $0$. Suppose there is a nonzero polynomial $g(x)$ such that $f(x)g(x) = 0$. Then $\text{deg }(f(x)g(x)) = 0$ but $0< \text{deg }f(x) \leq \text{deg }(f(x)g(x))$ since $\text{deg }(f(x)g(x)) = \text{deg }f(x) + \text{deg }g(x)$. 
+\end{proof}
+
+We turn now to section $2$ of the modern text \textit{A Classical Introduction to Modern Number Theory}. 
+
+\subsection*{Unique Factorization in $k[x]$}
+\setcounter{proposition}{0}
+\setcounter{definition}{0}
+
+If $f,g \in k[x]$, we say that $f$ divides $g$ if there is an $h \in k[x]$ such that $fh = g$. A nonconstant polynomial $p$ is said to be irreducible if $q|p$ implies that $q$ is either a constant polynomial or a constant polynomial times $p$. Irreducible polynomials are the analog of prime numbers. 
+
+\begin{lemma}
+Every nonconstant polynomial is the product of irreducible polynomials. 
+\end{lemma}
+
+First look at the proof of Lemma 1 from lecture 2. We proved that by contradiction. Now we will use induction to give a direct proof of this lemma. 
+
+\begin{proof}
+Polynomials of degree $1$ are irreducible. Assume the result is true for polynomials of degree less than $n$ and $\text{deg } f = n$. If $f$ is irreducible then we are done. Otherwise $f = gh$ where $1 \leq \text{deg } g, \text{deg } h < n$ by the induction assumption both $g$ and $h$ are products of irreducible polynomials. Thus, so is $f = gh$. 
+\end{proof}
+
+A monic polynomial is one whose leading term is 1.  The polynomial $x^2 + x -3$ is monic but $2x^5+1$ is not. 
+
+Let $p$ be a monic irreducible polynomial. We define $ord_p(f)$ to be the integer $a$ with the property that $p^a|f$ but $p^{a+1}\ndiv f$. Note $ord_p(f) = 0$ if and only if $p\ndiv f$. 
+
+\setcounter{theorem}{1}
+\begin{theorem}
+Let $f \in k[x]$. Then we can write $$f = c\prod_pp^{a(p)},$$ where the product is over all monic irreducible polynomials and $c$ is a constant. The constant $c$ and all the exponents $a(p)$ are uniquely determined by $f$ and $a(p) = ord_p(f)$.
+\end{theorem}
+
+Again, the existance of such a product follows from the previous lemma. The uniqueness of this product will require more work.\\ 
+
+Now we will get a result which is analogus to article 3 and lemma 2 guaranteeing the existance of unique least resiude for each modulus. This will allow us to extend the language of congruence to polynomials if we so desire. For the most part, our discussion of polynomials rings will take a modern approach. 
+
+\begin{lemma}
+Let $f,g \in k[x].$ If $g \neq 0,$ there exist polynomials $h,r \in k[x]$ such that $f = hg + r$ (classically, $f \equiv r \Mod{g}$), where either $r = 0$ or $r \neq 0$ and $\text{deg } r \leq \text{deg } g$.  
+\end{lemma}
+
+Review the analogous proof in lecture 2.  
+
+\begin{proof}
+If $g|f$ then set $h = f/g$ and $r = 0$. If $g \ndiv f$, let $r = f-hg$ be the polynomial of least degree among all polynomials of the form $f-lg$ for $l \in k[x]$. We claim that $\text{deg }r < \text{deg }g$. If, not let the leading term of $r$ be $ax^d$ and the leading term of $g$ be $bx^m$ where $m < d$. Thus, $ax^d/bx^m = \frac{a}{b}x^{d-m}$ is a polynomial in $k[x]$.  Call it $q$. Note that the leading term of $gq$ is $bx^m * \frac{a}{b}x^{d-m} = ax^d$, the leading term of $r$. We have $$r = f-hg,$$ subtracting $gq$ from both sides we obtain, $$r-gq = f-(h+q)g.$$ Since $gq$ and $r$ have the same leading term, their difference is of degree less than $r$. Hence $r$ cannot be the polynomial of least degree among all polynomials of the form $f-lg$, because we just showed $f-(h+q)g$ has lower degree then $f-hg$. We have reached a contradiction, therefore $\text{deg }r < \text{deg }g$ as desired. 
+\end{proof}
+
+\begin{definition}
+If $f_1,f_2,...,f_n \in k[x],$ then $(f_1,f_2,...,f_n)$ is the set of all polynomials of the form $f_1h_1+f_2h_2+\cdots f_nh_n,$ where $h_1,h_2,...,h_n \in k[x]$. Collections of this form are called ideals. We say $(f_1,f_2,...,f_n)$ is the ideal generated by the polynomials $f_1,f_2,...,f_n \in k[x]$. 
+\end{definition}
+
+\begin{lemma}
+Given $f,g \in k[x]$ there is a $d \in k[x]$ such that $(f,g) = (d)$. 
+\end{lemma}
+
+\begin{proof}
+Let $d$ be an element of least degree in $(f,g)$ clearly $(d) \subset (f,g)$. We need to show the reverse inclusion. Let $c \in (f,g)$, then if $d \ndiv c$ we have that there exists $q,r \in k[x]$ such that $c = dq + r$ where $r$ has lower degree than $d$. Thus $r$ has degree $0$. So $d|c$ thus $c \in (d)$ and it follows that $(f,g) \subset (d)$ and thus $(f,g) = (d)$. 
+\end{proof}
+
+\begin{definition}
+Let $f,g \in k[x]$. Then $d \in k[x]$ is said to be a greatest common divisor of $f$ and $g$ if $d$ divides $f$ and $g$, and if any other $c \in k[x]$ divides both $f$ and $g$, then $c$ must divide $d$.  
+\end{definition}
+
+Notice that if $d(x)$ is the greatest common divisor of two polynomails, then any constant multiple of $d(x)$ is also a greatest common divisor. When we talk about the greatest common divisor we mean the unique monic greatest common divisor. That is, there exists some constant polynomail    
+
+\end{document}
+
+
+
+
