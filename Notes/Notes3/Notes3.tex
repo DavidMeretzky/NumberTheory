@@ -142,7 +142,7 @@ Since $k|(a-b)$ and therefore $kx = (a-b)$ since $m|(a-b)$ we have $m|kx$ since 
 If $a$ and $b$ are divisible by $k$ and they are congruent relative to a modulus $m$ such that the greatest common divisor of $m$ and $k$ is $e$ then $a/k \equiv b/k \Mod{m/e}$.
 
 \begin{proof}
-It must be true that $k$ and $m/e$ are relatively prime. Otherwise there is an even greater common divisor contradicting that $e$ is the greatest common divisor. If $kx = (a-b)$ then $(m/e)|kx$ and therefore, $(m/e)|x$ since $k$ and $m/e$ are relatively prime. Since $x = (a-b)/k$, we have $(m/e)|(a-b)/k$ which is equivalent to $a/k \equiv b/k \Mod{m/e}$. 
+It must be true that $k/e$ and $m/e$ are relatively prime. Otherwise there is an even greater common divisor contradicting that $e$ is the greatest common divisor. Clearly since $e|m$ we have $e|a-b$. If $mx = (a-b)$ then $\frac{m}{e}x = \frac{(a-b)}{e}$ since $k|a-b$ we must have $\frac{k}{e}|\frac{(a-b)}{e}$ and therefore, $\frac{k}{e}|\frac{m}{e}x$. But since $k/e$ and $m/e$ are relatively prime, we have that $\frac{k}{e}|x$. Thus $x = \frac{k}{e}l$. So $\frac{m}{e}\frac{k}{e}l = \frac{(a-b)}{e}$. Multiplying both sides by $\frac{e}{k}$ we obtain $\frac{m}{e}l = \frac{(a-b)}{k}$ which is the same as $a/k \equiv b/k \Mod{m/e}$ as desired. 
 \end{proof}
 
 \begin{article}
@@ -150,7 +150,7 @@ If $a$ is a prime relative to $m$ and $e$ and $f$ are noncongruent relative to $
 \end{article}
 
 \begin{proof}
-We need to show that if $m\ndiv (e-f)$ then $m \ndiv (ae-af)$. Suppose $m \ndiv (ae-af)$, this is the same as $ae\equiv af \Mod{m}$, then since $a$ and $m$ are relatively prime, by Article 22, we have that $ae/a \equiv af/a \Mod{m}$ that is $m|(e-f)$, a contradiction. 
+We need to show that if $m\ndiv (e-f)$ then $m \ndiv (ae-af)$. Suppose $m | (ae-af)$, this is the same as $ae\equiv af \Mod{m}$, then since $a$ and $m$ are relatively prime, by Article 22, we have that $ae/a \equiv af/a \Mod{m}$ that is $m|(e-f)$, a contradiction. 
 \end{proof}
 
 Take all the residues $0$ to $m-1$, these are all noncongruent relative to $m$, then $a0$, $a1$, $a2$,...,$a(m-1)$ will all be noncongruent relative to $m$, thus when reduced to their least positive residues $a0$, $a1$, $a2$,...,$a(m-1)$ must be the whole set $0$ to $m-1$.\\ 
