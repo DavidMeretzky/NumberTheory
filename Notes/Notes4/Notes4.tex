@@ -149,7 +149,51 @@ Let $d$ be an element of least degree in $(f,g)$ clearly $(d) \subset (f,g)$. We
 Let $f,g \in k[x]$. Then $d \in k[x]$ is said to be a greatest common divisor of $f$ and $g$ if $d$ divides $f$ and $g$, and if any other $c \in k[x]$ divides both $f$ and $g$, then $c$ must divide $d$.  
 \end{definition}
 
-Notice that if $d(x)$ is the greatest common divisor of two polynomials, then any constant multiple of $d(x)$ is also a greatest common divisor. When we talk about the greatest common divisor we mean the unique monic greatest common divisor. That is, there exists some constant polynomial    
+Notice that if $d(x)$ is the greatest common divisor of two polynomials, then any constant multiple of $d(x)$ is also a greatest common divisor. When we talk about the greatest common divisor we mean the unique monic greatest common divisor. 
+
+\begin{proposition}
+Given $f,g \in k[x]$ by lemma 3, there is a $d \in k[x]$ such that $(f,g) = (d)$. Furthermore, this $d$ is the greatest common divisor of $f$ and $g$. 
+\end{proposition}
+
+\begin{proof}
+Clearly, since $f,g \in (d)$ we have that $d|f$ and $d|g$. Now if $h$ is any other polynomial dividing both $f$ and $g$, $h|(lf+kg)$ for all polynomials $l$ and $k$. Thus since $d \in (f,g)$ there exists some specific $l$ and $k$ such that $lf+kg = d$. Thus $h|d$. 
+\end{proof}
+
+\begin{definition}
+Two polynomials, $f$ and $g$ are said to be relatively prime if the only common divisors of $f$ and $g$ are constants. Equivalently, if $(f,g) = (1)$. Note also that $(1) = k[x]$. 
+\end{definition}
+
+\begin{proposition}
+If $f$ and $g$ are relatively prime and $f|gh$ then $f|h$. 
+\end{proposition}
+
+\begin{proof}
+Omitted. See the analogous proposition from notes 2. 
+\end{proof}
+
+\begin{corollary}
+If $p$ is an irreducible polynomial and $p|fg$ then $p|f$ or $p|g$. 
+\end{corollary}
+
+\begin{proof}
+Omitted. See the analogous proposition from notes 2. 
+\end{proof}
+
+\begin{corollary}
+If $p$ is a monic irreducible polynomial and $f,g\in k[x]$ we have $$ord_p(fg) = ord_p(f)+ord_p(g).$$
+\end{corollary}
+
+\begin{proof}
+Make the neccesary changes to the proof of the related corrolary from notes 2. 
+\end{proof}
+
+\begin{exercise}
+Prove theorem 2. 
+\end{exercise}
+
+\begin{exercise}
+Complete all omitted proofs in these notes. 
+\end{exercise}
 
 \end{document}
 
