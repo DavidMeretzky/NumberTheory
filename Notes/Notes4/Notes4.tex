@@ -83,11 +83,11 @@ Suppose that $p(x)$ is a unit of $k[x]$. Then $p(x)$ has a multiplicative invers
 \end{proof}
 
 \begin{proposition}
-The polynomial ring $k[x]$ is an integral domain, that is, it has no zero divisors. 
+When $k$ is an integral domain, the polynomial ring $k[x]$ is an integral domain, that is, it has no zero divisors. 
 \end{proposition}
 
 \begin{proof}
-The nonzero constant polynomials all have multiplicative inverses and therefore are units and cannot be zero divisors. Let $f(x)$ be a polynomial of degree greater than $0$. Suppose there is a nonzero polynomial $g(x)$ such that $f(x)g(x) = 0$. Then $\text{deg }(f(x)g(x)) = 0$ but $0< \text{deg }f(x) \leq \text{deg }(f(x)g(x))$ since $\text{deg }(f(x)g(x)) = \text{deg }f(x) + \text{deg }g(x)$. 
+Since $k$ is an integral domain, the nonzero constant polynomials are elements of $k$ and therefore cannot be zero divisors. Let $f(x)$ be a polynomial of degree greater than $0$. Suppose there is a nonzero polynomial $g(x)$ such that $f(x)g(x) = 0$. Then $\text{deg }(f(x)g(x)) = 0$ but $0< \text{deg }f(x) \leq \text{deg }(f(x)g(x))$ since $\text{deg }(f(x)g(x)) = \text{deg }f(x) + \text{deg }g(x)$. 
 \end{proof}
 
 We turn now to section $2$ of the modern text \textit{A Classical Introduction to Modern Number Theory}. 
@@ -95,6 +95,8 @@ We turn now to section $2$ of the modern text \textit{A Classical Introduction t
 \subsection*{Unique Factorization in $k[x]$}
 \setcounter{proposition}{0}
 \setcounter{definition}{0}
+
+We will take $k$ to be a field. Note that every field is an integral domain, that is, since all non-zero elements are units, there are no zero-divisors. 
 
 If $f,g \in k[x]$, we say that $f$ divides $g$ if there is an $h \in k[x]$ such that $fh = g$. A nonconstant polynomial $p$ is said to be irreducible if $q|p$ implies that $q$ is either a constant polynomial or a constant polynomial times $p$. Irreducible polynomials are the analog of prime numbers. 
 
@@ -147,7 +149,7 @@ Let $d$ be an element of least degree in $(f,g)$ clearly $(d) \subset (f,g)$. We
 Let $f,g \in k[x]$. Then $d \in k[x]$ is said to be a greatest common divisor of $f$ and $g$ if $d$ divides $f$ and $g$, and if any other $c \in k[x]$ divides both $f$ and $g$, then $c$ must divide $d$.  
 \end{definition}
 
-Notice that if $d(x)$ is the greatest common divisor of two polynomails, then any constant multiple of $d(x)$ is also a greatest common divisor. When we talk about the greatest common divisor we mean the unique monic greatest common divisor. That is, there exists some constant polynomail    
+Notice that if $d(x)$ is the greatest common divisor of two polynomials, then any constant multiple of $d(x)$ is also a greatest common divisor. When we talk about the greatest common divisor we mean the unique monic greatest common divisor. That is, there exists some constant polynomial    
 
 \end{document}
 
