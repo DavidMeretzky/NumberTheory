@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 JAN 2019 18:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  17 MAR 2019 16:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -97,21 +97,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--34
 
 [2] (./M313_Syllabus.aux) ) 
 Here is how much of TeX's memory you used:
- 238 strings out of 493014
- 2846 string characters out of 6133351
- 60601 words of memory out of 5000000
- 3861 multiletter control sequences out of 15000+600000
+ 239 strings out of 493014
+ 2854 string characters out of 6133351
+ 64601 words of memory out of 5000000
+ 3862 multiletter control sequences out of 15000+600000
  4294 words of font info for 16 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 23i,6n,17p,906b,105s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 23i,7n,17p,906b,105s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2016/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmti10.pfb>
-Output written on M313_Syllabus.pdf (2 pages, 62216 bytes).
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti10.pfb>
+Output written on M313_Syllabus.pdf (2 pages, 70668 bytes).
 PDF statistics:
- 23 PDF objects out of 1000 (max. 8388607)
- 15 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
