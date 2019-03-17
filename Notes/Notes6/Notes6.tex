@@ -1,0 +1,263 @@
+\documentclass{article}
+
+\usepackage{algorithmic, amsmath, amsthm, amsfonts, amssymb, dsfont, enumerate, tikz, tikz-cd, color, mathrsfs,inputenc,epigraph} %tikz is for drawing lattices %tikz-cd is for commutative diagrams
+															%color is for making notes in red 
+															%mathrsfs is for power set font
+%\usepackage[mathscr]{eucal} %mathscr gives nice script fonts
+
+\newtheoremstyle{problemstyle}  % <name> This is my problemstyle. use begin{problem}.
+        {12pt}                                               % <space above>
+        {}                                               % <space below>
+        {}                               % <body font>
+        {}                                                  % <indent amount}
+        {\bfseries}                 % <theorem head font>
+        {\normalfont\bfseries.}         % <punctuation after theorem head>
+        {.5em}                                          % <space after theorem head>
+        {}                                                  % <theorem head spec (can be left empty, meaning `normal')>
+
+
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+\DeclareSymbolFontAlphabet{\mathbbold}{bbold}
+
+\theoremstyle{problemstyle}
+
+\newtheorem{problem}{Problem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{proposition}{Proposition}
+\newtheorem{article}{Article}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{exercises}{Exercises}
+\newtheorem{exercise}{Exercise}
+\newtheorem{definition}{Definition}
+
+\setlength\parindent{0pt}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\ndiv}{\hspace{-4pt}\not|\hspace{2pt}}
+
+\title{ \vspace{-10ex} %uncomment to remove vertical space
+%title of assignment goes here e.g. "Math 721 Homework 3"
+Math 313/623 Notes 6
+}
+
+\author{David L. Meretzky
+}
+
+
+\date{%date assignment is due goes here
+Tuesday March 12th, 2019
+} 
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+%\renewcommand{\thefootnote}{$\dagger$} %changes default footnote marking to a dagger instead of a number (numbers are sometimes mistaken for citations)
+
+\begin{document}
+
+\maketitle
+
+\epigraph{Seven point six two, five point five six's, two-two-three}{YNW Melly}
+
+In these notes we will investigate some important arithmetic functions and the M\"obius transformation. 
+
+\section*{Applications of Unique Factorization}
+
+\subsection*{Some Arithmetic Functions}
+
+\begin{definition}
+Let $a \in \mathbb{Z}$ is square-free if it is not divisible by the square of any other integer greater than 1. 
+\end{definition}
+
+In particular a number is square free if and only if it is the product of distinct primes. 
+
+\begin{proposition}
+If $n \in \mathbb{Z}$ $n$ can be written in the form $n = ab^2$ where $a,b \in \mathbb{Z}$ and $a$ is square-free.  
+\end{proposition}
+
+\begin{example}
+Let $n = 2^3\cdot3^3$. In this case, $n$ can be rewritten as $(2\cdot 3)\cdot(2\cdot 3)^2$ where $a = 2\cdot 3$ and $b = 2\cdot 3$.  
+\end{example}
+
+\begin{proof}
+We may factor $n$ into primes $n = p_1^{a_1}p_2^{a_2}\cdots p_l^{a_l}$. Furthermore, each exponent can be written in the form, $a_i = 2b_i+r_i$ with $r_i = 0$ or $r_i = 1$ depending on whether or not each exponent is even or odd. Then set $a = p_1^{r_1}p_2^{r_2}\cdots p_l^{r_l}$ and $b = p_1^{b_1}p_2^{b_2}\cdots p_l^{b_l}$. Then $$n = p_1^{a_1}p_2^{a_2}\cdots p_l^{a_l} = p_1^{2b_1+r_1}p_2^{2b_2+r_2}\cdots p_l^{2b_l+r_l} = (p_1^{r_1}p_2^{r_2}\cdots p_l^{r_l})(p_1^{b_1}p_2^{b_2}\cdots p_l^{b_l})^2 = ab^2$$ as desired. 
+\end{proof}
+
+We can use this new representation to obtain a second proof that there are infinitely many primes in the integers. 
+
+\begin{theorem}
+There are infinitely many primes in $\mathbb{Z}$. 
+\end{theorem}
+
+\begin{proof}
+Assume there are only finitely many primes $p_1,\ldots,p_l$. Consider the set of positive integers less than or equal to an arbitrary number $N$. If $n \leq N$, represent $n$ as $n = ab^2$ where $a$ is square free. Since there are only $l$ primes, there are only $2^l$ ways of picking distinct primes from the list of primes. That is, $a = p_1^{\varepsilon_1}\cdots p_l^{\varepsilon_l}$ where $\varepsilon_i$ is either $0$ or $1$. There are $2^l$ possible choices for $a$. Note also that $b \leq \sqrt{N}$ because otherwise $n = ab^2 \geq N$. Each number $n \leq N$ is specified by picking a choice of $a$ and a choice of $b$. Since there are $2^l$ ways to choose $a$ and $\sqrt{N}$ ways to choose $b$, the total possible number of choices of numbers less than $N$ is at the most $2^l\sqrt{N}$.\\
+
+Thus $N \leq 2^l\sqrt{N}$ the number of numbers less than or equal to $N$, which is $N$, must be less than the minimum number of ways of expressing a number as $ab^2$ because otherwise there would be numbers less than $N$ which could not be expressed as $ab^2$. \\
+
+However, $N \leq 2^l\sqrt{N}$ implies (by dividing both sides by $\sqrt{N}$) $\sqrt{N} \leq 2^l$ which we can make false by just picking a large enough $N$. Thus there cannot possibly be only finitely many primes. 
+\end{proof}
+
+Now we will define some number theoretic functions. 
+
+\begin{definition}
+For $n \in \mathbb{Z}$ let $v(n)$ denote the number of positive divisors of $n$. 
+\end{definition}
+
+\begin{proposition}
+Given $n \in \mathbb{Z}$ with prime factorization $n = p_1^{a_1}\cdots p_l^{a_l}$, then $v(n) = (a_1+1)\cdots(a_l+1)$. 
+\end{proposition}
+
+\begin{proof}
+Every divisor of $n$ is of the form $p_1^{b_1}\cdots p_l^{b_l}$ where for each $i \in \{1,\ldots,l\}$ we have $0 \leq b_i \leq a_i$. Thus each $b_i$ could be any one of the $a_i+1$ possible numbers between $0$ and $a_i$. Since each divisor is determined by picking each $b_i$, and there are $(a_i+1)$ ways to pick each $b_i$, the total number of possible divisors is the product $(a_1+1)\cdots(a_l+1)$. 
+\end{proof}
+
+\begin{example}
+Let $p$ be a prime, then $v(p) = 2$.  
+\end{example}
+
+Take a moment to compute $v$ for various numbers. Make sure to convince yourself that the formula $v(n) = (a_1+1)\cdots(a_l+1)$ works. 
+
+\begin{definition}
+For $n \in \mathbb{Z}$ let $\sigma(n)$ denote the sum of the positive divisors of $n$. 
+\end{definition}
+
+\begin{example}
+For instance, for a prime $p$, $\sigma(p) = p+1$. 
+\end{example}
+
+\begin{proposition}
+Given $n \in \mathbb{Z}$ with prime factorization $n = p_1^{a_1}\ldots p_l^{a_l}$, then $$\sigma(n) = \left(\frac{p_1^{a_1+1}-1}{p_1-1}\right)\cdots\left(\frac{p_l^{a_1+1}-1}{p_l-1}\right)$$.
+\end{proposition}
+
+\begin{proof}
+By definition, $$\sigma(n) = \sum_{b_1 = 0}^{a_1}\cdots\sum_{b_l = 0}^{a_l}p_1^{b_1}\cdots p_l^{b_l} = \left(\sum_{b_1 = 0}^{a_1} p_1^{b_1}\right)\cdots\left(\sum_{b_l = 0}^{a_l}p_l^{b_l}\right)$$ By the formula for geometric series in the finite case, we have $$\left(\sum_{b_1 = 0}^{a_1} p_1^{b_1}\right)\cdots\left(\sum_{b_l = 0}^{a_l}p_l^{b_l}\right) = \left(\frac{p_1^{a_1+1}-1}{p_1-1}\right)\cdots\left(\frac{p_l^{a_1+1}-1}{p_l-1}\right)$$ as desired.
+\end{proof}
+
+\begin{definition}
+We call a number $n$ perfect if $\sigma(n) = 2n$. For example, $6$ and $28$ are perfect. 
+\end{definition}
+
+\begin{exercise}
+It is delightfully satisfying to show that if $2^{m+1}-1$ is prime (such primes are called mersenne primes) then $n = 2^m(2^{m+1}-1)$ is perfect. This is not hard, you simply apply the proposition and compute. Euclid knew this fact. Euler showed any perfect number is of this form. It is not known if there are infinitely many perfect numbers or if there are any odd perfect numbers. 
+\end{exercise}
+
+We will now define one of the most important number theoretic functions. It is called the M\"obius $\mu$ function. Roughly, it measures whether the number of primes appearing in a prime factorization is even or odd. Recall that every square-free number has prime a factorization which is a distinct product of primes, that is, no prime appears with a power greater than 1. so if $a$ is square free, $a = p_1\cdots p_l$, for distinct primes $p_1,\ldots,p_l$.
+
+\begin{definition}
+For $n \in \mathbb{Z}^{+}$, we define the M\"obius $\mu$ function by setting $\mu(1) = 1$, $\mu(n) = 0$ if $n$ is not square-free, and in the case $n$ is square free, $n = p_1p_2\cdots p_l$, $\mu(n) = \mu(p_1p_2\cdots p_l) = (-1)^{l}$. 
+\end{definition}
+
+\begin{proposition}
+If $n > 1$, then $$\sum_{d|n}\mu(d) = 0$$
+\end{proposition}
+
+Before looking at the following proof. Compute by hand the following example: $n = 2^33^47^2$.
+\begin{proof}
+If $n = p_1^{a_1}p_2^{a_2}\cdots p_l^{a_l}$ then $\sum_{d|n}\mu(d) = \sum_(\epsilon_1,\ldots,\epsilon_l)\mu(p_1^{\epsilon_1}\cdots p_l^{epsilon_l})$, where the $\epsilon_i$ are $0$ or $1$. This is because each divisor must be square-free to be non-zero in the sum. This is the sum over all square-free divisors. Evaluation of the $\mu$ function only counts the number of primes in the factorization of each square-free divisor. Thus, 
+$$\sum_{d|n}\mu(d) = (-1)^0\binom{l}{0} + (-1)^1\binom{l}{1} + (-1)^2\binom{l}{2}+\cdots+(-1)^{l+1}\binom{l}{l} = 0$$ 
+For instance, if there are $k$ primes in a divisor where $k$, the contribution of that divisor in the sum is $(-1)^k$. Furthermore, there are exactly $\binom{l}{k}$ ways to create a square-free divisor of $n$, with $k$ primes. Thus the contribution of the divisors with $k$ primes in the sum is $(-1)^k\binom{l}{k}$.     
+\end{proof}
+
+\begin{definition}
+Let $f$ and $g$ be functions from $\mathbb{Z}^{+}$ into $\mathbb{C}$, the complex numbers. The Dirichlet product of $f$ and $g$ is denoted $f\circ g$ and is defined as follows. For $n \in \mathbb{Z}^{+}$, $(f\circ g)(n) = \sum f(d_1)g(d_2)$ where the sum is over all products $(d_1,d_2)$ such that $d_1d_2 = n$.   
+\end{definition}
+
+A notational aside: We write the Dirchlet product of $f$ and $g$, $f\circ g$, evaluated at $n$ as $f\circ g(n)$ not as $(f\circ g)(n)$ to avoid using tons of parentheses. Note that $f\circ g(n)$ does not mean the dirichlet product of $f$ and $g(n)$, which is not defined, it means the dirichlet product of $f$ and $g$, $f\circ g$, evaluated at $n$. 
+ 
+\begin{exercise}
+Compute the dirichlet product of $f(n) = n$ and $g(n) = n^2$, $f\circ g(6)$. 
+\end{exercise}
+ 
+\begin{proposition}
+The Dirichlet product is associative, meaning $f \circ (g \circ h) = (f\circ g) \circ h$.  It is also commutative.
+\end{proposition}
+
+\begin{proof}
+Exercise. Check that when evaluated at some $n$, both sides of the equality are equal to $$\sum_{(d_1,d_2,d_3)}f(d_1)g(d_2)h(d_3)$$ where the sum is over all triples $(d_1,d_2,d_3)$, such that $d_1d_2d_3 = n$. Prove also that it is commutative. This is easy. 
+\end{proof}
+
+
+\begin{definition}
+Define the function $\mathbbold{I}$ as follows: $\mathbbold{I}(1) = 1$, $\mathbbold{I}(n) = 0$ for $n >0$.  
+\end{definition}
+
+\begin{proposition}
+The Dirichlet product $f\circ \mathbbold{I} = \mathbbold{I} \circ f = f$. 
+\end{proposition}
+
+\begin{proof}
+Compute $$f\circ \mathbbold{I}(n) = \sum_{(d_1,d_2)}f(d_1)\mathbbold{I}(d_2) = 0+0+\cdots+0+f(n)\mathbbold{I}(1) = f(n)$$ that is the only term that survives in the sum is when $d_2 = 1$, otherwise $\mathbbold{I}$ will kill the second factor. Compute $\mathbbold{I}\circ f (n)$ analogously.
+\end{proof}
+
+\begin{definition}
+Define the function $I$ as follows, $I(n) = 1$ for all $n \in \mathbb{Z}^+$.  
+\end{definition}
+
+\begin{proposition}
+The Dirichlet product $I \circ f(n) = f \circ I(n) = \sum_{d|n}f(d)$
+\end{proposition}
+
+\begin{proof}
+Compute $I \circ f(n) = \sum_{(d_1,d_2)}I(d_1)f(d_2) = \sum_{(d_1,d_2)}f(d_2) = \sum_{d|n}f(d)$. The last equality holds because $d_2$ is going over all numbers such that there exists a $d_1$ such that $d_1d_2 = n$. This is exactly the set of $d$ which divide $n$. Compute $f \circ I(n)$ analogously. 
+\end{proof}
+
+\begin{lemma}
+The Dirichlet product, $I \circ \mu = \mu \circ I = \mathbbold{I}$. 
+\end{lemma}
+
+\begin{proof}
+For $n = 1$, $I \circ \mu(n) = I(1)\mu(1) = 1(1) = 1$. For $n > 1$, $I \circ \mu(n) = \sum_{d|n}\mu(d) = 0$ by propositions 7 and 4.  
+\end{proof}
+
+\begin{theorem}
+M\"obius Inversion Formula: Let $F(n) = \sum_{d|n}f(d)$, then $f(n) = \sum_{d|n}\mu(d)F(n/d)$.
+\end{theorem}
+
+\begin{proof}
+$F(n) = f \circ I$. Thus $F \circ \mu = (f \circ I) \circ \mu = f \circ (I \circ \mu) = f \circ \mathbbold{I} = f$. Thus, $$f(n) = F \circ \mu(n) = \sum_{(d_1,d_2)}\mu(d_1)F(d_2) = \sum_{d|n}\mu(d)F(n/d)$$ since $d_1d_2 = n$. 
+\end{proof}
+
+We will see an application of the M\"obius Inversion Formula to end these notes. 
+
+\begin{definition}
+(Euler $\phi$ function)\footnote{$\phi$ is pronounced "fai", rhyming with "eye", and written in english: phi. It's all greek to me too, don't worry.}For $n \in \mathbb{Z}^+$, $\phi(n)$ is defined to be the number of integers $k$, $1 \leq k \leq n$, such that $k$ is relatively prime to $n$, meaning $(k,n) = 1$. 
+\end{definition}
+
+\begin{example}
+For instance, $\phi(1) = 1$, $\phi(5) = 4$, $\phi(6) = 2$, and in general for a prime $p$, $\phi(p) = p-1$. 
+\end{example}
+
+\begin{proposition}
+$\sum_{d|n}\phi(d) = n$.
+\end{proposition}
+
+\begin{proof}
+Consider the $n$ rational numbers $\frac{1}{n},\frac{2}{n},\frac{3}{n},\ldots,\frac{n-1}{n},\frac{n}{n}$. Reduce each fraction to lowest terms. Then the numerator and denominator will be relatively prime. Claim: if $d|n$ then exactly $\phi(d)$ of the denominators will be $d$. Since the claim is true (you will show this in an exercise; we also did this in class), and since every denominator will be a divisor of $n$ it follows that $\sum_{d|n}\phi(d) = n$. 
+\end{proof}
+
+\begin{proposition}
+Let $n \in \mathbb{Z}^+$ with prime factorization $n = p_1^{a_1}p_2^{a_2}\cdots p_l^{a_l}$. Then $$\phi(n) = n(1-(1/p_1))(1-(1/p_2))\cdots(1-(1/p_l)).$$
+\end{proposition}
+
+\begin{proof}
+Since $n = \sum_{d|n}\phi(d)$, applying the M\"obius Inversion Formula, we obtain $\phi(n) = \sum_{d|n}\mu(d)(n/d)$ and by the definition of $\mu$ we see that the only divisors which survive are the square free divisors, that is the $d$ which are a product of distinct primes. Additionally, the parity\footnote{evenness or oddness} of the number of distinct primes, determines if $\mu(d) = \pm 1$. For instance if $d$ is composed of 1 prime then $\mu(d) = (-1)^1$. Expanding the sum we obtain $$\phi(n) = n + \sum_i(-1)^1(n/p_i) + \sum_{i < j}(-1)^2(n/p_ip_j) + \sum_{i < j< k}(-1)^3(n/p_ip_jp_k) + \cdots $$ where each sum is over the possible ways of picking $r$ distinct primes out of $l$. This is the same as the ways of picking $r$ increasing indicies $i_1 < i_2 < \cdots < i_r$  where each $i_s$ is one of $1,2,\ldots,l$. 
+
+By inspection we see that $$n - \sum_i(n/p_i) + \sum_{i < j}(n/p_ip_j) - \cdots = n(1-(1/p_1))(1-(1/p_2))\cdots(1-(1/p_l)).$$
+\end{proof}
+
+
+\subsection*{Exercises}
+\begin{enumerate}
+\item Show that if $2^{m+1}-1$ is prime, then $n = 2^m(2^{m+1}-1)$ is perfect.
+\item Prove that for any positive integer $l$, $$(-1)^0\binom{l}{0} + (-1)^1\binom{l}{1} + (-1)^2\binom{l}{2}+\cdots+(-1)^{l+1}\binom{l}{l} = 0.$$ Hint: split this into two cases, $l$ is even and $l$ is odd.   
+\item Prove the claim in the proof of proposition 8. 
+\item Compute $\phi(2^5)$
+\item Compute $\phi(3^4)$
+\item Compute $\phi(7^{10})$
+\item Prove that $\phi(p^k) = p^k - p^{k-1}$ where $p$ is prime. 
+\item Give the alternate proof of proposition 8 that we did in class using the previous exercise, the fact that $\phi(mn) = \phi(m)\phi(n)$ where $(m,n) = 1$, and unique factorization. 
+\end{enumerate}
+\end{document}
+
+
+
+
