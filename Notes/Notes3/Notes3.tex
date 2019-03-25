@@ -315,6 +315,35 @@ We have the following set of inclusions so far.
 
 $$\text{Fields} \subset \text{Integral Domains} \subset \text{Commutative Rings}$$
 
+\subsection*{Exercises}
+
+\begin{enumerate}
+\item Given $n \in \mathbb{Z}$, how many divisors does $n$ have?
+\item Review example 1. 
+\item For what values of $a$ is $ax + b \equiv 1 \Mod{m}$ solvable? \\\\
+List the zero divisors, cancelative elements, and units of the following rings and indicate if they are fields and/or integral domains:
+\item $\mathbb{Z}$
+\item $\mathbb{Z}/2\mathbb{Z}$
+\item $\mathbb{Z}/3\mathbb{Z}$
+\item $\mathbb{Z}/4\mathbb{Z}$
+\item $\mathbb{Z}/5\mathbb{Z}$
+\item $\mathbb{Z}/6\mathbb{Z}$
+\item $\mathbb{Z}/11\mathbb{Z}$
+\item $\mathbb{Z}/12\mathbb{Z}$
+\item $\mathbb{Q}$ \\ \\
+Define the inclusion map $i:\mathbb{Z} \rightarrow \mathbb{R}$ by $i(z) = z$. That is, $i(5) = 5$ where the $5$ inside of the function is $5$ as an integer, and the $5$ on the right hand side is in $\mathbb{R}$. Define $\lfloor \ \ \rfloor:\mathbb{R} \rightarrow \mathbb{Z}$ to be the greatest integer less than or equal to the input. For example, $\lfloor 4.3 \rfloor = 4$, $\lfloor 4 \rfloor = 4$, $\lfloor 4.999999 \rfloor = 4$, and $\lfloor 5 \rfloor = 5$. Let $r_1,r_2 \in \mathbb{R}$ and $z_1,z_2 \in \mathbb{Z}$. 
+\item Prove that if $z_1 \leq z_2$ as integers, then $i(z_1) \leq i(z_2)$ as reals.  
+\item Prove that if $r_1 \leq r_2$ as reals, then $\lfloor r_1 \rfloor \leq \lfloor z_2 \rfloor$ as integers.  
+\item Prove that for any $r$, a real, then $i(\lfloor r \rfloor) \leq r$.  
+\item Prove that for any $z$, an integer, then $z \leq \lfloor i(z) \rfloor$.  
+\item Use the previous exercises to show that if $z$ is an integer and $r$ is a real number such that $z \leq \lfloor r \rfloor$ as integers, then $i(z) \leq r$ as reals. 
+\item Similarly show that if $z$ is an integer and $r$ is a real number such that $i(z) \leq r$ as reals, then $z \leq \lfloor r \rfloor$ as integers. 
+\item Conclude that if $z$ is an integer and $r$ is a real number then $z \leq \lfloor r \rfloor$ if and only if $i(z) \leq r$. 
+\item Define the ceiling function $\lceil \ \ \rceil : \mathbb{R} \rightarrow \mathbb{Z}$ which outputs the least integer greater than the input. For instance, $\lceil 4.3 \rceil = 5$. Modify exercises 13-19 to uncover the relationship between the inclusion map and $\lceil \ \ \rceil$. 
+
+\end{enumerate}
+
+
 \end{document}
 
 
